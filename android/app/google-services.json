@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "206774427020",
+    "firebase_url": "https://rsrs-1dae6-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "rsrs-1dae6",
+    "storage_bucket": "rsrs-1dae6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206774427020:android:80e8dddf5b71d440d08aa9",
+        "android_client_info": {
+          "package_name": "com.example.assignment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206774427020-fao34ng3782uuou47ekilrioeq563nbr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXh0WuMMoY1L8up7Ec8qQCVa_Pnf2PdIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206774427020-fao34ng3782uuou47ekilrioeq563nbr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "206774427020-eqlcl96l0benvlrj4b96jen5rlkavlsk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smsotp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206774427020:android:0a0e906b3550a10dd08aa9",
+        "android_client_info": {
+          "package_name": "com.example.smsotp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206774427020-5d5gbjb8t3roi6nb4kr1frreehu2mtqt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smsotp",
+            "certificate_hash": "2b2512a46453d15362bafcd25d62c117320bd2b5"
+          }
+        },
+        {
+          "client_id": "206774427020-fao34ng3782uuou47ekilrioeq563nbr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXh0WuMMoY1L8up7Ec8qQCVa_Pnf2PdIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206774427020-fao34ng3782uuou47ekilrioeq563nbr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "206774427020-eqlcl96l0benvlrj4b96jen5rlkavlsk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smsotp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
