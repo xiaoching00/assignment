@@ -27,12 +27,81 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  TextEditingController staffID = TextEditingController();
+  TextEditingController password = TextEditingController();
+  bool hideText = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: ListView(
-        children: [],
+      backgroundColor: const Color(0xff3a3e40),
+      body: Center(
+        child: Container(
+          height: 500,
+          margin: const EdgeInsets.only(left:20,right:20),
+          padding: const EdgeInsets.all(20),
+          child: Card(
+            elevation: 20,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    //const Padding(padding: EdgeInsets.all(50)),
+                    // Image.asset(
+                    //   "assets/login.png",
+                    //   height: 200,
+                    //   scale: 0.5,
+                    // ),
+                    TextFormField(
+                      controller: staffID,
+                      decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.person, color: Colors.black87),
+                          labelText: "ID",
+                          hintText: "Type your id"
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(10)),
+                    TextFormField(
+                      obscureText: hideText,
+                      controller: password,
+                      decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.lock, color: Colors.black87,),
+                          suffixIcon: IconButton(
+                              onPressed: (){
+                                setState(() {
+                                  hideText = !hideText;
+                                });
+                              },
+                              icon: Icon(hideText ? Icons.visibility_off : Icons.visibility)
+                          ),
+                          labelText: "Password",
+                          hintText: "Type your password"
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(10)),
+                    Container(
+                      width: 400,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.black87,
+                      ),
+                      child: TextButton(
+                        onPressed: (){},
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
