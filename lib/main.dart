@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:flutter/services.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:intl/intl.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
+import 'verify.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MaterialApp(
     title: 'Flutter Demo',
     theme: ThemeData(
@@ -33,7 +47,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: const Color(0xff3a3e40),
+      ),
       backgroundColor: const Color(0xff3a3e40),
       body: Center(
         child: Container(
@@ -95,6 +111,19 @@ class _MyAppState extends State<MyApp> {
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(10)),
+                    TextButton(
+                        onPressed: (){
+                          setState(() {
+                            Navigator.push(
+                                context, MaterialPageRoute(
+                                builder: (context) => const verify()
+                            )
+                            );
+                          });
+                        }, 
+                        child: const Text("Next")
                     ),
                   ],
                 ),
