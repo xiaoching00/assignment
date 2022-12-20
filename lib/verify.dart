@@ -1,9 +1,9 @@
 import 'dart:async';
+import 'package:assignment/email.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'email.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -54,8 +54,6 @@ class verify extends StatefulWidget {
 class _verifyState extends State<verify> {
   TextEditingController phone = TextEditingController();
   TextEditingController otp = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController pin = TextEditingController();
   String verifyID = "";
   int countdown = 0;
   Timer? timer;
@@ -65,7 +63,7 @@ class _verifyState extends State<verify> {
 
   Future<void> sendOTP() async{
     timer?.cancel();
-    if(phone.text == null){
+    if(phone.text == "" || phone.text == null){
       isEnable = isEnable;
     }else if(formKey.currentState!.validate()){
       isEnable = true;
@@ -127,7 +125,7 @@ class _verifyState extends State<verify> {
     try{
       //int parse("1")
       //Data type                      //                 //username & password     //temporary username, temporary password
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verifyID, smsCode: pin.text);
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verifyID, smsCode: otp.text);
       UserCredential resp = await FirebaseAuth.instance.signInWithCredential(credential);
       if(formKey.currentState!.validate()){
 
@@ -141,7 +139,7 @@ class _verifyState extends State<verify> {
           print("Insert Successfully");
           Navigator.push(
               context, MaterialPageRoute(
-              builder: (context) => const email();
+              builder: (context) => const email()
           )
           );
         }).catchError((error){
@@ -191,7 +189,7 @@ class _verifyState extends State<verify> {
                     decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.phone),
                         labelText: "Phone number",
-                        hintText: "Enter your phone number"
+                        hintText: "Eg: 01XXXXXXX"
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -200,7 +198,7 @@ class _verifyState extends State<verify> {
                     children: [
                       TextButton(
                         onPressed: countdown == 0 ? sendOTP: null,
-                        child: Text(countdown == 0 ? "Get Pin":"Resend your otp after $countdown s"),
+                        child: Text(countdown == 0 ? "Get OTP":"Resend your otp after $countdown s"),
                       ),
                     ],
                   ),
@@ -217,7 +215,7 @@ class _verifyState extends State<verify> {
                       ),
                       alignment: Alignment.center,
                       child: TextFormField(
-                        controller: pin,
+                        controller: otp,
                         keyboardType: TextInputType.number,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
@@ -227,31 +225,67 @@ class _verifyState extends State<verify> {
                               Icons.pin,
                               color: Colors.deepOrange,
                             ),
-                            labelText: "Pin",
-                            hintText: "Enter your pin",
+                            labelText: "OTP",
+                            hintText: "Enter your otp",
                             enabledBorder: InputBorder.none,
                             focusedBorder: InputBorder.none
                         ),
                         validator: (val1){
                           if( val1 == null || val1 == ""){
-                            return "Please fill in your pin";
+                            return "Please fill in your otp";
                           }
                           return null;
                         },
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20,),
-                  Visibility(
-                    visible: isVisible,
-                    child: TextButton(
-                      onPressed: verifyOTP,
-                      child: const Text("Next"),
-                    ),
-                  ),
-                  const SizedBox(height: 10,),
-                  Container(
-
+                  const SizedBox(height: 60,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                          onPressed: (){
+                            setState(() {
+                              Navigator.push(
+                                  context, MaterialPageRoute(
+                                  builder: (context) => const email()
+                                )
+                              );
+                            });
+                          },
+                          child: const Text(
+                              "Skip",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black38
+                            ),
+                          )
+                      ),
+                      const Padding(padding: EdgeInsets.all(8)),
+                      Visibility(
+                          visible: isVisible,
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Container(
+                              width: 110,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Colors.indigo[800]
+                              ),
+                              child: TextButton(
+                                onPressed: verifyOTP,
+                                child: const Text(
+                                  "Next",
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                      ),
+                    ],
                   ),
                 ],
               ),
